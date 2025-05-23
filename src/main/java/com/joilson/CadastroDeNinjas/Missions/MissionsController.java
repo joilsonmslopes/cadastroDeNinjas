@@ -1,15 +1,33 @@
 package com.joilson.CadastroDeNinjas.Missions;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("api/missoes")
 public class MissionsController {
 
-    @GetMapping("/missoes")
+    @GetMapping("buscar")
     public String getMissoes() {
-        return "Missões";
+        return "Lista de Missões";
+    }
+
+    @PostMapping("criar")
+    public String createMission() {
+        return "Missão criada com sucesso";
+    }
+
+    @GetMapping("listarId")
+    public String getMissionById() {
+        return "Minha Missão";
+    }
+
+    @PutMapping("atualizarId")
+    public String updateMissionById() {
+        return "Missão atualizada com sucesso";
+    }
+
+    @DeleteMapping("deletarId")
+    public String deleteMissionById() {
+        return "Missão deletada com sucesso";
     }
 }
