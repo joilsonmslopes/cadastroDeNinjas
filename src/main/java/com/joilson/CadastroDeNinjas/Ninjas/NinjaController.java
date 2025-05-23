@@ -1,10 +1,20 @@
 package com.joilson.CadastroDeNinjas.Ninjas;
 
+import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/ninjas")
 public class NinjaController {
+
+    private NinjaService ninjaService;
+
+    public NinjaController(NinjaService ninjaService) {
+        this.ninjaService = ninjaService;
+    }
 
     @GetMapping("/boas-vindas")
     public String boasVindas() {
@@ -19,14 +29,14 @@ public class NinjaController {
 
     // listar todos os ninjas
     @GetMapping("/listar")
-    public String getNinjas() {
-        return "Lista de ninjas";
+    public List<NinjaModel> getNinjas() {
+        return ninjaService.getNinjas();
     }
 
     // buscar ninja por ID
-    @GetMapping("/listarId")
-    public String getNinjaById() {
-        return "Meu Ninja";
+    @GetMapping(value = "/listarId/{id}")
+    public NinjaModel getNinjaById(@PathVariable long id) {
+        return ninjaService.getNinjaById(id);
     }
 
     // atualizar informações de um ninja
