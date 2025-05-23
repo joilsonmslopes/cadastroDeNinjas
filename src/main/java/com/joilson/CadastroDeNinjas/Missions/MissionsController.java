@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/missoes")
 public class MissionsController {
 
-    @GetMapping("/buscar")
+    @GetMapping("/listar")
     public String getMissoes() {
         return "Lista de Missões";
     }
