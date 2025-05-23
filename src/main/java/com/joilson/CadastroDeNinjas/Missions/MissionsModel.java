@@ -16,18 +16,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_missoes")
+@Table(name = "tb_missions")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MissionsModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     private String name;
 
-    private Rank rank;
+    private String level;
 
     // Uma missão pode ter vários ninjas
     @OneToMany(mappedBy = "mission")
