@@ -2,6 +2,7 @@ package com.joilson.CadastroDeNinjas.Missions;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.joilson.CadastroDeNinjas.Rank;
 import com.joilson.CadastroDeNinjas.Ninjas.NinjaModel;
 
@@ -31,5 +32,6 @@ public class MissionsModel {
 
     // Uma missão pode ter vários ninjas
     @OneToMany(mappedBy = "mission")
+    @JsonIgnore
     private List<NinjaModel> ninjas;
 }
