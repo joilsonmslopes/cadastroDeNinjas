@@ -3,40 +3,40 @@ package com.joilson.CadastroDeNinjas.Ninjas;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/ninjas")
 public class NinjaController {
 
-    @GetMapping("boas-vindas")
+    @GetMapping("/boas-vindas")
     public String boasVindas() {
         return "Hello World! Bem vindo ao SpringBoot!";
     }
 
     // adicionar ninja
-    @PostMapping("cadastrar")
+    @PostMapping("/cadastrar")
     public String createNinja() {
         return "Ninja Adicionado com sucesso";
     }
 
     // listar todos os ninjas
-    @GetMapping("listar")
+    @GetMapping("/listar")
     public String getNinjas() {
         return "Lista de ninjas";
     }
 
     // buscar ninja por ID
-    @GetMapping("listarId")
+    @GetMapping("/listarId")
     public String getNinjaById() {
         return "Meu Ninja";
     }
 
     // atualizar informações de um ninja
-    @PutMapping("atualizar")
+    @PutMapping("/atualizar")
     public String updateNinja() {
         return "Ninja atualizad com sucesso";
     }
 
     // deletar um ninja
-    @DeleteMapping("deletar")
+    @DeleteMapping("/deletar")
     public String deleteNinja() {
         return "Ninja deletado com sucesso";
     }
