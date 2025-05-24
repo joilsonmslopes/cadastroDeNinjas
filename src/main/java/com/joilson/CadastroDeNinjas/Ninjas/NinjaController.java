@@ -1,29 +1,27 @@
 package com.joilson.CadastroDeNinjas.Ninjas;
 
-import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/ninjas")
 public class NinjaController {
 
-    private NinjaService ninjaService;
+    private final NinjaService ninjaService;
 
     public NinjaController(NinjaService ninjaService) {
         this.ninjaService = ninjaService;
     }
 
-    @GetMapping("/boas-vindas")
+    @GetMapping("/")
     public String boasVindas() {
-        return "Hello World! Bem vindo ao SpringBoot!";
+        return "Bem vindo a API de Cadastro de Ninjas!";
     }
 
     // adicionar ninja
     @PostMapping("/cadastrar")
-    public NinjaModel createNinja(@RequestBody NinjaModel ninja) {
+    public NinjaDTO createNinja(@RequestBody NinjaDTO ninja) {
         return ninjaService.createNinja(ninja);
     }
 
@@ -40,7 +38,7 @@ public class NinjaController {
     }
 
     // atualizar informações de um ninja
-    @PutMapping("/atualizar/{id}")
+    @PatchMapping("/atualizar/{id}")
     public NinjaModel updateNinja(@PathVariable Long id, @RequestBody NinjaModel ninja) {
         return ninjaService.updateNinja(id, ninja);
     }
