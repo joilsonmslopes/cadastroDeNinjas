@@ -28,8 +28,9 @@ public class NinjaModel {
 
     private int age;
 
-    // @ManyToOne um ninja tem uma única missão
+    private String rank;
+
     @ManyToOne
-    @JoinColumn(name = "mission_id") // Foreing key
+    @JoinColumn(name = "mission_id")
     private MissionsModel mission;
 }
