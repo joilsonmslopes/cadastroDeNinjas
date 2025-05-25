@@ -1,6 +1,11 @@
 package com.joilson.CadastroDeNinjas.Ninjas;
 
-import org.apache.coyote.Response;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +22,14 @@ public class NinjaController {
         this.ninjaService = ninjaService;
     }
 
-    @GetMapping("/")
-    public String boasVindas() {
-        return "Bem vindo a API de Cadastro de Ninjas!";
-    }
-
+    @Operation(
+            summary = "Rota para cadastro de um Ninja",
+            description = "Essa rota é para criação de um novo ninja"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Ninja criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos")
+    })
     @PostMapping("/cadastrar")
     public ResponseEntity<String> createNinja(@RequestBody NinjaDTO ninja) {
         NinjaDTO newNinja = ninjaService.createNinja(ninja);
@@ -29,13 +37,30 @@ public class NinjaController {
     }
 
     @GetMapping("/listar")
+    @Operation(
+            summary = "Rota para listar todos os Ninjas",
+            description = "Essa rota retorna uma lista de todos os ninjas cadastrados"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Lista de ninjas retornada com sucesso")
+    })
     public ResponseEntity<List<NinjaDTO>> getNinjas() {
         List<NinjaDTO> ninjas = ninjaService.getNinjas();
         return ResponseEntity.ok(ninjas);
     }
 
     @GetMapping(value = "/listar/{id}")
-    public ResponseEntity<?> getNinjaById(@PathVariable long id) {
+    @Operation(
+            summary = "Rota para buscar um Ninja pelo ID",
+            description = "Essa rota retorna um ninja específico com base no ID informado"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Ninja encontrado"),
+            @ApiResponse(responseCode = "404", description = "Ninja não encontrado")
+    })
+    public ResponseEntity<?> getNinjaById(
+            @Parameter(description = "ID do Ninja a ser buscado", required = true)
+            @PathVariable long id) {
         NinjaDTO ninja = ninjaService.getNinjaById(id);
 
         if (ninja != null) {
@@ -46,7 +71,23 @@ public class NinjaController {
     }
 
     @PatchMapping("/atualizar/{id}")
-    public ResponseEntity<?> updateNinja(@PathVariable Long id, @RequestBody NinjaDTO ninja) {
+    @Operation(
+            summary = "Rota para atualizar um Ninja",
+            description = "Essa rota permite atualizar os dados de um ninja existente",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Dados atualizados do ninja",
+                    required = true,
+                    content = @Content(schema = @Schema(implementation = NinjaDTO.class)))
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Ninja atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Ninja não encontrado"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos")
+    })
+    public ResponseEntity<?> updateNinja(
+            @Parameter(description = "ID do Ninja a ser atualizado", required = true)
+            @PathVariable Long id,
+            @RequestBody NinjaDTO ninja) {
         NinjaDTO ninjaUpdated = ninjaService.updateNinja(id, ninja);
         if (ninjaUpdated != null) {
             return ResponseEntity.ok(ninjaUpdated);
@@ -56,6 +97,14 @@ public class NinjaController {
     }
 
     @DeleteMapping("/deletar/{id}")
+    @Operation(
+            summary = "Rota para deletar um Ninja",
+            description = "Essa rota permite excluir um ninja com base no ID informado"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Ninja deletado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Ninja não encontrado")
+    })
     public ResponseEntity<String> deleteNinja(@PathVariable Long id) {
         NinjaDTO ninjaFound = ninjaService.getNinjaById(id);
 
@@ -66,7 +115,5 @@ public class NinjaController {
         }
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ninja com o ID: " + id + " não foi encontado");
-
-
     }
 }
