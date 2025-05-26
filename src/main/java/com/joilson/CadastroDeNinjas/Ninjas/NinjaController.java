@@ -114,6 +114,6 @@ public class NinjaController {
             return ResponseEntity.ok("Ninja " + ninjaFound.getName() + " com o (ID): " + ninjaFound.getId() + " deletado com sucesso!");
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ninja com o ID: " + id + " não foi encontado");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ninja com o ID: " + id + " não foi encontrado");
     }
 }

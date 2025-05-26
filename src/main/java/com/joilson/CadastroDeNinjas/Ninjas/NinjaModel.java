@@ -1,14 +1,11 @@
 package com.joilson.CadastroDeNinjas.Ninjas;
 
-import com.joilson.CadastroDeNinjas.Missions.MissionsModel;
+import com.joilson.CadastroDeNinjas.Missions.MissionModel;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-// Entity - Transforma a classe em uma entidade do banco de dados
-// JPA - Java Persistence API
 
 @Entity
 @Table(name = "tb_cadastro")
@@ -32,5 +29,5 @@ public class NinjaModel {
 
     @ManyToOne
     @JoinColumn(name = "mission_id")
-    private MissionsModel mission;
+    private MissionModel mission;
 }

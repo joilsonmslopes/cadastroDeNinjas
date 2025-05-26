@@ -1,6 +1,6 @@
 package com.joilson.CadastroDeNinjas.Ninjas;
 
-import com.joilson.CadastroDeNinjas.Missions.MissionsModel;
+import com.joilson.CadastroDeNinjas.Missions.MissionModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +13,6 @@ public class NinjaDTO {
     private String name;
     private String email;
     private int age;
-    private MissionsModel mission;
+    private MissionModel mission;
     private String rank;
 }

@@ -2,7 +2,6 @@ package com.joilson.CadastroDeNinjas.Ninjas;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,17 +18,6 @@ public class NinjaService {
 
     public List<NinjaDTO> getNinjas() {
         List<NinjaModel> ninjas = ninjasRepository.findAll();
-
-        // utilizando for
-        /*
-         *  List<NinjaDTO> ninjasDTO = new ArrayList<>();
-         *
-         *  for (NinjaModel ninja : ninjas) {
-         *      ninjasDTO.add(ninjaMapper.map(ninja));
-         *  }
-         *
-         *  return ninjasDTO;
-         */
 
         return ninjas.stream()
                 .map(ninjaMapper::map)

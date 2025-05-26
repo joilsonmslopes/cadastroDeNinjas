@@ -30,7 +30,6 @@ public class MissionsModel {
 
     private String level;
 
-    // Uma missão pode ter vários ninjas
     @OneToMany(mappedBy = "mission")
     @JsonIgnore
     private List<NinjaModel> ninjas;
