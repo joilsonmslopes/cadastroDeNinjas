@@ -3,7 +3,6 @@ package com.joilson.CadastroDeNinjas.Missions;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.joilson.CadastroDeNinjas.Rank;
 import com.joilson.CadastroDeNinjas.Ninjas.NinjaModel;
 
 import jakarta.persistence.Entity;
@@ -21,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MissionsModel {
+public class MissionModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
